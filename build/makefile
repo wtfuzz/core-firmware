@@ -95,6 +95,7 @@ CPPFLAGS = -fno-exceptions -fno-rtti
 LDFLAGS += -T../linker/linker_stm32f10x_md_dfu.ld -nostartfiles -Xlinker --gc-sections 
 LDFLAGS += -L$(SRC_PATH)/$(LIB_CORE_COMMON_PATH)/build -lcore-common-lib
 LDFLAGS += -L$(SRC_PATH)/$(LIB_CORE_COMMUNICATION_PATH)/build -lcore-communication-lib
+LDFLAGS += -L$(SRC_PATH)/$(LIB_CC3K_PATH)/build -lcc3k-lib
 LDFLAGS += -Wl,-Map,$(TARGET).map
 LDFLAGS += --specs=nano.specs -lc -lnosys
 LDFLAGS += -u _printf_float
