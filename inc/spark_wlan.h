@@ -30,13 +30,6 @@
 extern "C" {
 
 #include "hw_config.h"
-#include "evnt_handler.h"
-#include "hci.h"
-#include "wlan.h"
-#include "nvmem.h"
-#include "socket.h"
-#include "netapp.h"
-#include "security.h"
 
 /* CC3000 EEPROM - Spark File Data Storage */
 #define NVMEM_SPARK_FILE_ID			14	//Do not change this ID
@@ -69,9 +62,11 @@ extern int Spark_Process_API_Response(void);
 
 extern volatile uint32_t TimingFlashUpdateTimeout;
 
+/*
 extern tNetappIpconfigRetArgs ip_config;
 extern netapp_pingreport_args_t ping_report;
 extern int ping_report_num;
+*/
 
 extern volatile uint8_t WLAN_DHCP;
 extern volatile uint8_t SPARK_WLAN_SETUP;

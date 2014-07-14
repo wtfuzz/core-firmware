@@ -27,7 +27,6 @@
 #include "spark_utilities.h"
 #include "spark_wiring.h"
 #include "socket.h"
-#include "netapp.h"
 #include "string.h"
 #include <stdarg.h>
 
@@ -298,6 +297,7 @@ void SparkClass::sleep(long seconds)
 
 inline uint8_t isSocketClosed()
 {
+#if 0
   uint8_t closed  = get_socket_active_status(sparkSocket)==SOCKET_STATUS_INACTIVE;
 
   if(closed)
@@ -314,6 +314,8 @@ inline uint8_t isSocketClosed()
       closed = true;
     }
   return closed;
+#endif
+  return 1;
 }
 
 bool SparkClass::connected(void)
@@ -387,6 +389,7 @@ int Spark_Send(const unsigned char *buf, int buflen)
 // Returns number of bytes received or -1 if an error occurred
 int Spark_Receive(unsigned char *buf, int buflen)
 {
+#if 0
   if(SPARK_WLAN_RESET || SPARK_WLAN_SLEEP || isSocketClosed())
   {
     //break from any blocking loop
@@ -426,6 +429,9 @@ int Spark_Receive(unsigned char *buf, int buflen)
     return num_fds_ready;
   }
   return bytes_received;
+#endif
+
+  return 0;
 }
 
 void Spark_Prepare_For_Firmware_Update(void)
@@ -536,6 +542,7 @@ void Spark_Protocol_Init(void)
 
 int Spark_Handshake(void)
 {
+#if 0
   Spark_Protocol_Init();
   spark_protocol.reset_updating();
   int err = spark_protocol.handshake();
@@ -550,6 +557,8 @@ int Spark_Handshake(void)
   Spark.publish("spark/cc3000-patch-version", patchstr, 60, PRIVATE);
 
   return err;
+#endif
+  return 0;
 }
 
 // Returns true if all's well or
@@ -767,12 +776,14 @@ int Spark_Disconnect(void)
 
 void Spark_ConnectAbort_WLANReset(void)
 {
+#if 0
 	//Work around to exit the blocking nature of socket calls
 	tSLInformation.usEventOrDataReceived = 1;
 	tSLInformation.usRxEventOpcode = 0;
 	tSLInformation.usRxDataPending = 0;
 
 	SPARK_WLAN_RESET = 1;
+#endif
 }
 
 int userVarType(const char *varKey)

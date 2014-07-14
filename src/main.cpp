@@ -39,6 +39,8 @@ extern "C" {
 #include "sst25vf_spi.h"
 }
 
+volatile uint8_t SPARK_LED_FADE;
+
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
@@ -241,15 +243,18 @@ void Timing_Decrement(void)
 	{
 		TimingLED--;
 	}
+#if 0
 	else if(WLAN_SMART_CONFIG_START || SPARK_FLASH_UPDATE || Spark_Error_Count)
 	{
 		//Do nothing
 	}
+#endif
 	else if(SPARK_LED_FADE)
 	{
 		LED_Fade(LED_RGB);
 		TimingLED = 20;//Breathing frequency kept constant
 	}
+#ifdef SPARK_WLAN_ENABLE
 	else if(SPARK_WLAN_SETUP && SPARK_CLOUD_CONNECTED)
 	{
 #if defined (RGB_NOTIFICATIONS_CONNECTING_ONLY)
@@ -268,6 +273,7 @@ void Timing_Decrement(void)
 		else
 			TimingLED = 100;	//100ms
 	}
+#endif
 
 #ifdef SPARK_WLAN_ENABLE
 	if(!SPARK_WLAN_SETUP || SPARK_WLAN_SLEEP)

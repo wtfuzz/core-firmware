@@ -113,6 +113,7 @@ int8_t NetworkClass::RSSI()
  the same way.
  *****************************************************************************/
 
+#if 0
 uint32_t NetworkClass::ping(IPAddress remoteIP)
 {
   return ping(remoteIP, 5);
@@ -136,5 +137,6 @@ uint32_t NetworkClass::ping(IPAddress remoteIP, uint8_t nTries)
   }
   return result;
 }
+#endif
 
 NetworkClass Network;

@@ -47,6 +47,8 @@ LIB_CORE_COMMON_PATH = ../core-common-lib
 LIB_CORE_COMMUNICATION_PATH = ../core-communication-lib
 LIB_CORE_LIBRARIES_PATH = libraries/
 
+LIB_CC3K_PATH = ../../cc3k
+
 # Include directoris for optional "libraries" (eg. Serial2.h)
 INCLUDE_DIRS += $(LIB_CORE_LIBRARIES_PATH)/Serial2
 
@@ -55,13 +57,14 @@ INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/CMSIS/Include
 INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/CMSIS/Device/ST/STM32F10x/Include
 INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/STM32F10x_StdPeriph_Driver/inc
 INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/STM32_USB-FS-Device_Driver/inc
-INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/CC3000_Host_Driver
 INCLUDE_DIRS += $(LIB_CORE_COMMON_PATH)/SPARK_Firmware_Driver/inc
 INCLUDE_DIRS += $(LIB_CORE_COMMUNICATION_PATH)/lib/tropicssl/include
 INCLUDE_DIRS += $(LIB_CORE_COMMUNICATION_PATH)/src
 
+INCLUDE_DIRS += $(LIB_CC3K_PATH)/include
+
 # Compiler flags
-CFLAGS =  -g3 -gdwarf-2 -Os -mcpu=cortex-m3 -mthumb 
+CFLAGS =  -g3 -gdwarf-2 -O0 -mcpu=cortex-m3 -mthumb 
 CFLAGS += $(patsubst %,-I$(SRC_PATH)/%,$(INCLUDE_DIRS)) -I.
 CFLAGS += -ffunction-sections -Wall -fmessage-length=0
 
@@ -72,7 +75,8 @@ CFLAGS += -MD -MP -MF $@.d
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 CFLAGS += -DSTM32F10X_MD
 CFLAGS += -DDFU_BUILD_ENABLE
-CFLAGS += -DSPARK=1
+CFLAGS += -DSPARK=0
+CFLAGS += -DUSE_SWD_JTAG
 
 ifeq ("$(USE_SWD_JTAG)","y") 
 CFLAGS += -DUSE_SWD_JTAG

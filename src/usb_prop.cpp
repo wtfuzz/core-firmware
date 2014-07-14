@@ -24,6 +24,7 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdlib.h>
 #include "main.h"
 extern "C" {
 #include "usb_lib.h"

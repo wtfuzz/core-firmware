@@ -596,7 +596,7 @@ void RTCAlarm_IRQHandler(void)
 {
 	if(RTC_GetITStatus(RTC_IT_ALR) != RESET)
 	{
-		SPARK_WLAN_SLEEP = 0;
+		//SPARK_WLAN_SLEEP = 0;
 
 		/* Clear EXTI line17 pending bit */
 		EXTI_ClearITPendingBit(EXTI_Line17);
